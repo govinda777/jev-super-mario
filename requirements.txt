@@ -1,0 +1,6 @@
+typesafe-sdk>=0.7.0
+python-dotenv>=1.0.0
+gym-super-mario-bros>=9.1.0
+nes-py>=9.0.1
+pygame-ce>=2.5.0
+typesafe-mario @ git+https://github.com/fhshaik/typesafe-mario.git

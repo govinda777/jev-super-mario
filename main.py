@@ -1,3 +1,9 @@
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from typesafe_sdk import TypeSafeClient, Choice, Score
 
 client = TypeSafeClient()
@@ -31,7 +37,11 @@ response = client.system_one(
 )
 
 # 3. Execução no jogo
-chosen_action = response.answers["action"].choice
+action_answer = response.answers["action"]
+danger_answer = response.answers["danger_level"]
+
+print(f"Ação escolhida pelo Jev: {action_answer.choice} (confiança: {action_answer.confidence:.0%})")
+print(f"Nível de perigo avaliado: score {danger_answer.score:.2f} (confiança: {danger_answer.confidence:.0%})")
 
 # Mock do emulador para evitar erro de execução (NameError)
 class Emulator:
@@ -39,4 +49,4 @@ class Emulator:
         print(f"Executando ação no emulador: {action}")
 
 emulator = Emulator()
-emulator.press_buttons(chosen_action)
+emulator.press_buttons(action_answer.choice)
